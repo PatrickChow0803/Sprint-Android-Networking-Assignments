@@ -16,10 +16,10 @@ interface JsonPlaceHolderApi {
     fun getEmployees(): Call<List<Employee>>
 
     @GET("employees/{id}")
-    fun getEmployees(@Path("id") employeeId: String): Call<List<Employee>>
+    fun getEmployeesById(@Path("id")employeeId: String): Call<List<Employee>>
 
     @GET("employees")
-    fun getEmployeeByAge(@Query("age") employeeId: String): Call<List<Employee>>
+    fun getEmployeesByAge(@Query("age")employeeAge: String): Call<List<Employee>>
 
     @POST("employees")
     fun addNewEmployee(@Body employee: Employee): Call<Employee>
@@ -27,13 +27,14 @@ interface JsonPlaceHolderApi {
     @PUT("employees")
     fun updateEmployee(@Body employee: Employee): Call<Employee>
 
-    @DELETE("employee/{id}")
-    fun deleteEmployee(@Path("id") id: String): Call<Void>
+    @DELETE("employees/{id}")
+    fun deleteEmployeeById(@Path("id") id: String): Call<Void>
 
     class Factory {
+
         companion object {
-            val BASE_URL = "https://demo8143297.mockable.io"
-            val gson = Gson()
+
+            private const val BASE_URL = "https://demo8143297.mockable.io"
 
             fun create(): JsonPlaceHolderApi {
 
@@ -51,7 +52,7 @@ interface JsonPlaceHolderApi {
                 val retrofit = Retrofit.Builder()
                     .client(okHttpClient)
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson)) //gson
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
 
                 return retrofit.create(JsonPlaceHolderApi::class.java)

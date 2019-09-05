@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
                 notConnectedToast()
             }
             else{
-                val intent = Intent(this, GetActivity::class.java)
+                val intent = Intent(this, GetPickerActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 val intent = Intent(this, PostActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 val intent = Intent(this, DeleteActivity::class.java)
+                startActivity(intent)
             }
         }
 
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 val intent = Intent(this, PutActivity::class.java)
+                startActivity(intent)
             }
         }
 
