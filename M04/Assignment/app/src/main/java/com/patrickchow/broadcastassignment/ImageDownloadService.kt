@@ -14,7 +14,12 @@ class ImageDownloadService: Service(){
 
         Thread(Runnable (){
             val bitmap = NetworkAdapter.getBitmapFromUrl("https://i.imgur.com/HaSmgGn.jpg")
-            
+
+            val intent = Intent(FILE_DOWNLOADED_ACTION).apply {
+                putExtra(DOWNLOADED_IMAGE_KEY, bitmap)
+            }
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
             stopSelf()
         }).start()
 
@@ -36,6 +41,8 @@ class ImageDownloadService: Service(){
 
     }
 
-
-
+    companion object{
+        const val FILE_DOWNLOADED_ACTION = "com.lambdaschool.serviceimagedownloader.FILE_DOWNLOADED"
+        const val DOWNLOADED_IMAGE_KEY = "downloadedImage"
+    }
 }
